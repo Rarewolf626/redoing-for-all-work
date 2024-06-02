@@ -10,10 +10,8 @@ class UsersTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
         $users = User::factory(1)->create(
             [
@@ -21,7 +19,7 @@ class UsersTableSeeder extends Seeder
                 'last_name' => 'Skywalker',
                 'email' => 'luke@jedi.com',
                 'email_verified_at' => null,
-                'password' => bcrypt('123123')
+                'password' => bcrypt('123123'),
             ]
         );
 

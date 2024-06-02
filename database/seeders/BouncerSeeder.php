@@ -3,22 +3,17 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use Illuminate\Database\Seeder;
-
 use Bouncer;
-use App\Models\MediaFile;
+use Illuminate\Database\Seeder;
 
 class BouncerSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
         Bouncer::allow('admin')->everything();
-        Bouncer::allow('regular')->toOwn(MediaFile::class)->to(['list', 'view', 'create', 'edit', 'delete']);
         Bouncer::allow('regular')->to('edit-profile', User::class);
     }
 }

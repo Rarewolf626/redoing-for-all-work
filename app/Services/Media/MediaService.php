@@ -2,10 +2,7 @@
 
 namespace App\Services\Media;
 
-use App\Models\MediaFile;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
@@ -17,11 +14,9 @@ class MediaService
     /**
      * Handles a file upload to the storage
      *
-     * @param  UploadedFile  $file
-     * @param  User  $user
-     * @param $collection
      *
      * @return Media
+     *
      * @throws FileDoesNotExist
      * @throws FileIsTooBig
      */
@@ -38,11 +33,9 @@ class MediaService
     /**
      * Handles a file upload to the storage
      *
-     * @param  UploadedFile  $file
-     * @param  User  $user
-     * @param $collection
      *
      * @return Media
+     *
      * @throws FileDoesNotExist
      * @throws FileIsTooBig
      */
@@ -50,5 +43,4 @@ class MediaService
     {
         return $user->addMedia($file)->toMediaCollection($collection);
     }
-
 }

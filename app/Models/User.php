@@ -6,11 +6,8 @@ use App\Traits\Filterable;
 use App\Traits\Searchable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Foundation\Testing\Concerns\InteractsWithAuthentication;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Log;
 use Laravel\Sanctum\HasApiTokens;
 use Silber\Bouncer\Database\HasRolesAndAbilities;
 use Spatie\Image\Manipulations;
@@ -18,18 +15,16 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class User extends Authenticatable implements MustVerifyEmail, HasMedia
+class User extends Authenticatable implements HasMedia, MustVerifyEmail
 {
+    use Filterable, Searchable;
     use HasApiTokens, HasFactory, Notifiable;
-
     use HasRolesAndAbilities;
-
-    use Searchable, Filterable;
-
     use InteractsWithMedia;
 
     /**
      * ALlowed search fields
+     *
      * @var string[]
      */
     protected $searchFields = ['first_name', 'last_name', 'middle_name', 'email'];
@@ -49,15 +44,6 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
     protected $hidden = [
         'password',
         'remember_token',
-    ];
-
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
     ];
 
     /**
@@ -82,6 +68,18 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
     }
 
     /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'email_verified_at' => 'datetime',
+        ];
+    }
+
+    /**
      * @return \Closure|mixed|null|Media
      */
     public function avatar()
@@ -91,6 +89,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
 
     /**
      * Returns the avatar url attribute
+     *
      * @return string|null
      */
     public function getAvatarUrlAttribute()
@@ -105,6 +104,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
 
     /**
      * Returns the avatar url attribute
+     *
      * @return string|null
      */
     public function getAvatarThumbUrlAttribute()
@@ -119,6 +119,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
 
     /**
      * Returns the full_name attribute
+     *
      * @return string
      */
     public function getFullNameAttribute()
@@ -126,7 +127,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
         $names = [];
         foreach (['first_name', 'middle_name', 'last_name'] as $key) {
             $value = $this->getAttribute($key);
-            if ( ! empty($value)) {
+            if (! empty($value)) {
                 $names[] = $value;
             }
         }
@@ -136,6 +137,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
 
     /**
      * Returns the is_admin attribute
+     *
      * @return bool
      */
     public function getIsAdminAttribute()
@@ -146,21 +148,19 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
     /**
      * Register the conversions
      *
-     * @param  Media|null  $media
      *
-     * @return void
      * @throws \Spatie\Image\Exceptions\InvalidManipulation
      */
-    public function registerMediaConversions(Media $media = null): void
+    public function registerMediaConversions(?Media $media = null): void
     {
         $this->addMediaConversion('small_thumb')
-             ->fit(Manipulations::FIT_CROP, 300, 300)
-             ->nonQueued();
+            ->fit(Manipulations::FIT_CROP, 300, 300)
+            ->nonQueued();
         $this->addMediaConversion('medium_thumb')
-             ->fit(Manipulations::FIT_CROP, 600, 600)
-             ->nonQueued();
+            ->fit(Manipulations::FIT_CROP, 600, 600)
+            ->nonQueued();
         $this->addMediaConversion('large_thumb')
-             ->fit(Manipulations::FIT_CROP, 1200, 1200)
-             ->nonQueued();
+            ->fit(Manipulations::FIT_CROP, 1200, 1200)
+            ->nonQueued();
     }
 }

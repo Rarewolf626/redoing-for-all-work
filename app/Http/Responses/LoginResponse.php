@@ -8,10 +8,7 @@ use Laravel\Fortify\Fortify;
 
 class LoginResponse implements LoginResponseContract
 {
-
     /**
-     * @param  $request
-     *
      * @return mixed
      */
     public function toResponse($request)
@@ -20,5 +17,4 @@ class LoginResponse implements LoginResponseContract
             ? response()->json(['user' => Auth::user()])
             : redirect()->intended(Fortify::redirects('login'));
     }
-
 }

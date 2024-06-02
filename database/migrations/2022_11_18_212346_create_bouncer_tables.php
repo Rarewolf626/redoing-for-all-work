@@ -1,19 +1,16 @@
 <?php
 
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 use Silber\Bouncer\Database\Models;
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Database\Migrations\Migration;
-
-class CreateBouncerTables extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create(Models::table('abilities'), function (Blueprint $table) {
             $table->bigIncrements('id');
@@ -55,8 +52,8 @@ class CreateBouncerTables extends Migration
             );
 
             $table->foreign('role_id')
-                  ->references('id')->on(Models::table('roles'))
-                  ->onUpdate('cascade')->onDelete('cascade');
+                ->references('id')->on(Models::table('roles'))
+                ->onUpdate('cascade')->onDelete('cascade');
         });
 
         Schema::create(Models::table('permissions'), function (Blueprint $table) {
@@ -73,21 +70,19 @@ class CreateBouncerTables extends Migration
             );
 
             $table->foreign('ability_id')
-                  ->references('id')->on(Models::table('abilities'))
-                  ->onUpdate('cascade')->onDelete('cascade');
+                ->references('id')->on(Models::table('abilities'))
+                ->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::drop(Models::table('permissions'));
         Schema::drop(Models::table('assigned_roles'));
         Schema::drop(Models::table('roles'));
         Schema::drop(Models::table('abilities'));
     }
-}
+};

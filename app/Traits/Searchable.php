@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\Schema;
 trait Searchable
 {
     /**
-     * @param \Illuminate\Database\Eloquent\Builder|static  $query
-     * @param string  $keyword
-     * @param boolean  $matchAllFields
+     * @param  \Illuminate\Database\Eloquent\Builder|static  $query
+     * @param  string  $keyword
+     * @param  bool  $matchAllFields
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public static function scopeSearch($query, $keyword, $matchAllFields = false)

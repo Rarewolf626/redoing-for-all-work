@@ -1,6 +1,6 @@
 <?php
 
-use App\Providers\RouteServiceProvider;
+use App\Providers\AppServiceProvider;
 use Laravel\Fortify\Features;
 
 return [
@@ -61,8 +61,8 @@ return [
     |
     */
 
-    //'home' => RouteServiceProvider::HOME,
-    'home' => env( 'SPA_URL' ) . '/panel/dashboard',
+    //'home' => AppServiceProvider::HOME,
+    'home' => env('APP_URL').'/panel/dashboard',
 
     /*
     |--------------------------------------------------------------------------
@@ -141,7 +141,7 @@ return [
         //Features::twoFactorAuthentication([
         //    'confirm' => true,
         //    'confirmPassword' => true,
-            // 'window' => 0,
+        // 'window' => 0,
         //]),
     ],
 

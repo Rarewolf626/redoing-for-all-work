@@ -17,9 +17,9 @@ use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
 class UserService
 {
-
     /**
      * The service instance
+     *
      * @var MediaService
      */
     protected $mediaService;
@@ -35,7 +35,6 @@ class UserService
     /**
      * Get a single resource from the database
      *
-     * @param  User  $user
      *
      * @return UserResource
      */
@@ -47,20 +46,19 @@ class UserService
     /**
      * Get resource index from the database
      *
-     * @param $query
-     *
+     * @param  $query
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index($data)
     {
         $query = User::query();
-        if (!empty($data['search'])) {
+        if (! empty($data['search'])) {
             $query = $query->search($data['search']);
         }
-        if (!empty($data['filters'])) {
+        if (! empty($data['filters'])) {
             $this->filter($query, $data['filters']);
         }
-        if (!empty($data['sort_by']) && !empty($data['sort'])) {
+        if (! empty($data['sort_by']) && ! empty($data['sort'])) {
             $query = $query->orderBy($data['sort_by'], $data['sort']);
         }
 
@@ -70,9 +68,9 @@ class UserService
     /**
      * Creates resource in the database
      *
-     * @param  array  $data
      *
      * @return Builder|Model|null
+     *
      * @throws FileDoesNotExist
      * @throws FileIsTooBig
      */
@@ -89,13 +87,13 @@ class UserService
         $avatar = Data::take($data, 'avatar');
 
         $record = User::query()->create($data);
-        if (!empty($record)) {
+        if (! empty($record)) {
             // Set avatar
-            if (!empty($avatar)) {
+            if (! empty($avatar)) {
                 $this->mediaService->replace($avatar, $record, 'avatars');
             }
             // Set roles
-            if (!empty($roles)) {
+            if (! empty($roles)) {
                 Bouncer::sync($record)->roles($roles);
             }
 
@@ -108,10 +106,9 @@ class UserService
     /**
      * Updates resource in the database
      *
-     * @param  User  $user
-     * @param  array  $data
      *
      * @return bool
+     *
      * @throws FileDoesNotExist
      * @throws FileIsTooBig
      */
@@ -133,7 +130,7 @@ class UserService
             $this->mediaService->replace($data['avatar'], $user, 'avatars');
         }
 
-        if (!empty($roles)) {
+        if (! empty($roles)) {
             Bouncer::sync($user)->roles($roles);
         }
 
@@ -143,8 +140,6 @@ class UserService
     /**
      * Update avatar for the specified resource
      *
-     * @param  User  $user
-     * @param  array  $data
      *
      * @return bool
      */
@@ -153,7 +148,7 @@ class UserService
         if (isset($data['avatar']) && $data['avatar']) {
             $this->mediaService->replace($data['avatar'], $user, 'avatars');
         }
-        if (!empty($data)) {
+        if (! empty($data)) {
             return $user->update($data);
         } else {
             return false;
@@ -164,7 +159,6 @@ class UserService
      * Deletes resource in the database
      *
      * @param  User|Model  $user
-     *
      * @return bool
      */
     public function delete(User $user)
@@ -175,14 +169,13 @@ class UserService
     /**
      * Clean the data
      *
-     * @param  array  $data
      *
      * @return array
      */
     private function clean(array $data)
     {
         foreach ($data as $i => $row) {
-            if ('null' === $row) {
+            if ($row === 'null') {
                 $data[$i] = null;
             }
         }
@@ -192,15 +185,16 @@ class UserService
 
     /**
      * Filter resources
+     *
      * @return void
      */
     private function filter(Builder &$query, $filters)
     {
         $query->filter(Arr::except($filters, ['role']));
 
-        if (!empty($filters['role'])) {
+        if (! empty($filters['role'])) {
             $roleFilter = Filterable::parseFilter($filters['role']);
-            if (!empty($roleFilter)) {
+            if (! empty($roleFilter)) {
                 if (is_array($roleFilter[2])) {
                     $query->whereIs(...$roleFilter[2]);
                 } else {

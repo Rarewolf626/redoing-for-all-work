@@ -6,13 +6,9 @@ use Illuminate\Database\Eloquent\Builder;
 
 trait Filterable
 {
-
     /**
      * Filters a query by key:value parameters
      *
-     * @param  Builder  $query
-     * @param  array  $data
-     * @param  string  $operator
      * @return Builder
      */
     public function scopeFilter(Builder $query, array $data, string $operator = 'AND')
@@ -34,9 +30,9 @@ trait Filterable
             if (is_array($inputVal)) {
                 call_user_func_array([$query, $callbacks[$operator.'_WHERE_IN']], [$column, $inputVal]);
             } else {
-                if (!is_numeric($inputVal)) {
+                if (! is_numeric($inputVal)) {
                     $comparison = 'LIKE';
-                    $inputVal = "%".$inputVal."%";
+                    $inputVal = '%'.$inputVal.'%';
                 }
                 call_user_func_array([$query, $callbacks[$operator.'_WHERE']], [$column, $comparison, $inputVal]);
             }
@@ -47,7 +43,7 @@ trait Filterable
 
     /**
      * Parse the filter
-     * @param $value
+     *
      * @return array|string|string[]
      */
     public static function parseFilter($value)
@@ -61,6 +57,7 @@ trait Filterable
         if (strpos($value, '|') !== false) {
             $filterParts[$totalFilterParts - 1] = explode('|', $value);
         }
+
         return $filterParts;
     }
 }
