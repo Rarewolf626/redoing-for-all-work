@@ -42,7 +42,7 @@ class AppServiceProvider extends ServiceProvider
     public function bootAuth()
     {
         ResetPassword::createUrlUsing(function ($user, string $token) {
-            return env('SPA_URL').'/reset-password?token='.$token;
+            return env('APP_URL').'/reset-password?token='.$token;
         });
     }
 

@@ -62,7 +62,7 @@ return [
     */
 
     //'home' => AppServiceProvider::HOME,
-    'home' => env('SPA_URL').'/panel/dashboard',
+    'home' => env('APP_URL').'/panel/dashboard',
 
     /*
     |--------------------------------------------------------------------------
