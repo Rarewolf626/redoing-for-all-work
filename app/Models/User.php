@@ -47,15 +47,6 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
     ];
 
     /**
-     * The attributes that should be cast.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
-
-    /**
      * The accessors to append to the model's array form.
      *
      * @var array
@@ -74,6 +65,18 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
     public static function boot()
     {
         parent::boot();
+    }
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'email_verified_at' => 'datetime',
+        ];
     }
 
     /**
