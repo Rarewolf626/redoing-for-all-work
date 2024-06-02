@@ -10,10 +10,13 @@ export default defineConfig({
         __INTLIFY_PROD_DEVTOOLS__: false,
     },
     plugins: [
-        laravel([
-            'resources/scss/main.scss',
-            'resources/js/main.js',
-        ]),
+        laravel({
+            input: [
+                'resources/styles/main.scss',
+                'resources/app/main.js',
+            ],
+            refresh: true,
+        }),
         vue({
             template: {
                 transformAssetUrls: {
@@ -35,7 +38,7 @@ export default defineConfig({
     ],
     resolve: {
         alias: {
-            '@': path.resolve(__dirname, './resources/js'),
+            '@': path.resolve(__dirname, './resources/app'),
         },
         extensions: ['.js', '.ts', '.jsx', '.tsx', '.json', '.vue', '.mjs']
     }

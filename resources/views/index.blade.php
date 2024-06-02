@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>{{env('APP_NAME')}}</title>
 
-    @vite(['resources/scss/main.scss', 'resources/js/main.js'])
+    @vite(['resources/styles/main.scss', 'resources/app/main.js'])
 
     <script>
         window.AppConfig = {
             name: '{{ env('APP_NAME') }}',
-            logo: '{{ env('APP_LOGO') }}',
+            logo: '{{ url('/assets/images/logo.png')  }}',
             url: '{{ env('APP_URL') }}',
             csrf: '{{ csrf_token() }}',
             defaultLocale: '{{ env('APP_LOCALE', 'en') }}',

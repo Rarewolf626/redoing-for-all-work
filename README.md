@@ -79,7 +79,7 @@ For your convenience the project comes with complete `users` crud that includes 
 
 ### ➡️ Structure
 
-The front-end code is located in `resources/js`. The code is organized in different directories to make things more readable.
+The front-end code is located in `resources/app`. The code is organized in different directories to make things more readable.
 
 | Directory    | Description                           |
 |--------------|---------------------------------------|
