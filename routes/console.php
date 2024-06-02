@@ -19,6 +19,6 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote');
 
 Artisan::command('logs:clear', function () {
-    exec('rm ' . storage_path('logs/*.log'));
+    exec('rm '.storage_path('logs/*.log'));
     $this->comment('Logs have been cleared!');
 })->describe('Clear log files');

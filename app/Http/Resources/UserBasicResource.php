@@ -14,10 +14,10 @@ class UserBasicResource extends JsonResource
      */
     public function toArray($request)
     {
-      return [
-        'id' => $this->id,
-        'name' => $this->first_name . ' ' . $this->last_name,
-        'email' => $this->email,
-      ];
+        return [
+            'id' => $this->id,
+            'name' => $this->first_name.' '.$this->last_name,
+            'email' => $this->email,
+        ];
     }
 }

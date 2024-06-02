@@ -2,11 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-use Illuminate\Database\Seeder;
-
-use Bouncer;
 use App\Models\MediaFile;
+use App\Models\User;
+use Bouncer;
+use Illuminate\Database\Seeder;
 
 class BouncerSeeder extends Seeder
 {

@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class MediaFile extends Model
@@ -12,6 +11,7 @@ class MediaFile extends Model
     use HasFactory;
 
     protected $table = 'media';
+
     protected $guarded = ['id'];
 
     /**

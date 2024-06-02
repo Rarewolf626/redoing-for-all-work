@@ -16,6 +16,7 @@ class Controller extends BaseController
 
     /**
      * Returns the current user
+     *
      * @return User|\Illuminate\Contracts\Auth\Authenticatable|null
      */
     protected function getCurrentUser()
@@ -25,7 +26,7 @@ class Controller extends BaseController
 
     /**
      * Send data response
-     * @param array $data
+     *
      * @return JsonResponse
      */
     protected function responseDataSuccess(array $data)
@@ -36,8 +37,6 @@ class Controller extends BaseController
     /**
      * Send a successful response
      *
-     * @param $data
-     * @param $code
      * @return \Illuminate\Http\JsonResponse
      */
     protected function responseDeleteSuccess($data = [], $code = 200)
@@ -45,12 +44,9 @@ class Controller extends BaseController
         return $this->responseSuccess(trans('frontend.global.phrases.record_deleted'), $data, $code);
     }
 
-
     /**
      * Send a failed response
      *
-     * @param  array  $data
-     * @param $code
      * @return \Illuminate\Http\JsonResponse
      */
     protected function responseDeleteFail(array $data = [], int $code = 422)
@@ -61,8 +57,6 @@ class Controller extends BaseController
     /**
      * Send a successful response
      *
-     * @param $data
-     * @param $code
      * @return \Illuminate\Http\JsonResponse
      */
     protected function responseUpdateSuccess($data = [], $code = 200)
@@ -70,12 +64,9 @@ class Controller extends BaseController
         return $this->responseSuccess(trans('frontend.global.phrases.record_updated'), $data, $code);
     }
 
-
     /**
      * Send a failed response
      *
-     * @param  array  $data
-     * @param $code
      * @return \Illuminate\Http\JsonResponse
      */
     protected function responseUpdateFail(array $data = [], int $code = 422)
@@ -86,8 +77,6 @@ class Controller extends BaseController
     /**
      * Send a successful response
      *
-     * @param $data
-     * @param $code
      * @return \Illuminate\Http\JsonResponse
      */
     protected function responseStoreSuccess($data = [], $code = 200)
@@ -95,12 +84,9 @@ class Controller extends BaseController
         return $this->responseSuccess(trans('frontend.global.phrases.record_created'), $data, $code);
     }
 
-
     /**
      * Send a failed response
      *
-     * @param  array  $data
-     * @param $code
      * @return \Illuminate\Http\JsonResponse
      */
     protected function responseStoreFail(array $data = [], int $code = 422)
@@ -111,9 +97,6 @@ class Controller extends BaseController
     /**
      * Send a successful response
      *
-     * @param  string  $message
-     * @param  array  $data
-     * @param  int  $code
      * @return JsonResponse
      */
     protected function responseSuccess(string $message, array $data = [], int $code = 200)
@@ -124,9 +107,6 @@ class Controller extends BaseController
     /**
      * Send a failed response
      *
-     * @param  string  $message
-     * @param  array  $data
-     * @param  int  $code
      * @return \Illuminate\Http\JsonResponse
      */
     protected function responseFail(string $message, array $data = [], int $code = 400)
@@ -136,9 +116,7 @@ class Controller extends BaseController
 
     /**
      * Returns a response
-     * @param  int  $code
-     * @param  string  $message
-     * @param  array  $data
+     *
      * @return JsonResponse
      */
     protected function response(int $code, string $message = '', array $data = [])

@@ -15,5 +15,4 @@ class DestroyUserRequest extends BaseRequest
 
         ];
     }
-
 }

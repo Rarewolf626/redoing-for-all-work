@@ -62,7 +62,7 @@ return [
     */
 
     //'home' => RouteServiceProvider::HOME,
-    'home' => env( 'SPA_URL' ) . '/panel/dashboard',
+    'home' => env('SPA_URL').'/panel/dashboard',
 
     /*
     |--------------------------------------------------------------------------
@@ -141,7 +141,7 @@ return [
         //Features::twoFactorAuthentication([
         //    'confirm' => true,
         //    'confirmPassword' => true,
-            // 'window' => 0,
+        // 'window' => 0,
         //]),
     ],
 

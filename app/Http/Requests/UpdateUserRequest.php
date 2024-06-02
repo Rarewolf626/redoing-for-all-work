@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Models\User;
-
 class UpdateUserRequest extends BaseRequest
 {
     /**
@@ -20,8 +18,7 @@ class UpdateUserRequest extends BaseRequest
             'email' => 'required|email|unique:users,email,'.$this->request->get('email').',email|max:200',
             'roles' => 'required|array|exists:roles,name',
             'avatar' => 'nullable|image',
-            'password' => 'nullable|min:6'
+            'password' => 'nullable|min:6',
         ];
     }
-
 }
