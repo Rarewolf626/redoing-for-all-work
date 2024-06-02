@@ -14,7 +14,7 @@ class BouncerSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         Bouncer::allow('admin')->everything();
         Bouncer::allow('regular')->toOwn(MediaFile::class)->to(['list', 'view', 'create', 'edit', 'delete']);
